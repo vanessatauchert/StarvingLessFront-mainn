@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    
+        <link rel="stylesheet" type="text/css" href="/css/home.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="/css/header.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="/css/login.css" media="screen" /> 
+    </head>
+
+
+
+    <header>
+        <div id="mainNav"></div>
+    </header>
+
+  <body>
+      <div class="container">
+          <div id="newcomment" class="newcomment"><!--Mensagens-->
+            <div class="chat_window">
+              <div class="bottom_wrapper clearfix">
+                <div id="editarcomentario" class="invisivel">
+                    <h6 class="comentarios-titulo">Editar Comentário</h6>
+                    <div class="message_input_wrapper">
+                        <input id="message_input" class="message_input" placeholder="Nova Mensagem do Comentário" /><!--editar descrição-->
+                    </div>
+                    <div id="send_message" class="send_message" style="margin-top: -10px;">
+                      <div class="text" title="Enviar"><i class="bi bi-send"></i></div><!--Enviar-->
+                    </div>
+                </div>
+              </div>
+                <ul id="comments" class="messages"></ul><!--Montar Comentário-->
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="/js/jwt-js-decode.pkg.min.js"></script>
+      <script script type="text/javascript" src="/js/comments.js"></script>
+      <script>
+        $(function () {
+            $("#mainNav").load("header.html");
+        });
+      </script>
+  </body>
+</html>

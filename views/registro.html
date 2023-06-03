@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="/css/login.css" media="screen" />
+
+<body>
+    <div class="login-page" style="padding: 30px 0 0;">
+        <div class="form">
+          <form id="registerform" class="registerform">
+              <input id="firstname" class="message_input" placeholder="Nome" maxlength="50" /><!--editar FirstName-->
+              <input id="lastname" class="message_input" placeholder="Sobrenome" /><!--editar LastName-->
+              <input id="cpf" class="message_input" placeholder="CPF" /><!--editar LastName-->
+              <input id="address" class="message_input" placeholder="Endereço" /><!--editar LastName-->
+              <input id="password" class="message_input" placeholder="Senha" /><!--editar LastName-->
+              <input id="email" class="message_input" placeholder="E-mail" /><!--editar LastName-->
+              <input id="phone" class="message_input" placeholder="Telefone" /><!--editar LastName-->
+              <div class="text" title="Atualizar"><i class="bi bi-send"></i></div><!--Phone-->
+            <button id="submit" class="disabled">CADASTRAR</button>
+            <div class="captcha" onload="generate()">
+              <div class="wrapper"></div>
+              <h2 id="status" class="" style="font-size: 13px;"></h2>
+              <div>
+                  <input type="text" id="generated-captcha" readonly>
+              </div>
+              <div>
+                  <input type="text" id="entered-captcha" placeholder="Digite o código" onpaste="return false" ondrop="return false">
+              </div>
+              <div style="display: inline-block">
+                  <button id="novocodde" type="button" onclick="generate()" id="gen" style="width: 145px; display: inline-block; background-color: #1877f2;">
+                      Novo Código
+                  </button>
+                  <button type="button" onclick="check()" style="width: 90px; display: inline-block">
+                      Checar
+                  </button>
+              </div>
+          </div>
+            <p class="message">Já está cadastrado? <a href="/index.html">Login</a></p>
+          </form>
+        </div>
+      </div>
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script src="//unpkg.com/jwt-js-decode@1.5.1/dist/jwt-js-decode.pkg.min.js"></script>
+      <script script type="text/javascript" src="/js/valida_registro.js"></script>
+      <script>
+        let captcha;
+        let alphabets = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+        console.log(alphabets.length);
+        let status = document.getElementById('status');
+        status.innerText = "";
+
+        generate = () => {
+            // console.log(status)
+            let first = alphabets[Math.floor(Math.random() * alphabets.length)];
+            let second = Math.floor(Math.random() * 10);
+            let third = Math.floor(Math.random() * 10);
+            let fourth = alphabets[Math.floor(Math.random() * alphabets.length)];
+            let fifth = alphabets[Math.floor(Math.random() * alphabets.length)];
+            let sixth = Math.floor(Math.random() * 10);
+            captcha = first.toString()+second.toString()+third.toString()+fourth.toString()+fifth.toString()+sixth.toString();
+            console.log(captcha);
+            document.getElementById('generated-captcha').value = captcha;
+            document.getElementById("entered-captcha").value = '';
+            status.innerText = ""
+            }
+            document.getElementById("submit").disabled = true;
+            document.getElementById("novocodde").click();
+
+            check = () => {
+            // console.log(status)
+            let userValue = document.getElementById("entered-captcha").value;
+            console.log(captcha);
+            console.log(userValue);
+            if(userValue == captcha){
+                $("#status").addClass("correto").removeClass("incorreto");
+                status.innerText = "Código correto, clique em CADASTRAR"
+                $("#submit").addClass("primary").removeClass("disabled");
+                document.getElementById("submit").disabled = false;
+            }else{
+                $("#status").addClass("incorreto").removeClass("correto");
+                status.innerText = "Código incorreto!!"
+                document.getElementById("entered-captcha").value = '';
+                $("#submit").addClass("disabled").removeClass("primary");
+                document.getElementById("submit").disabled = true;
+            }
+        }
+      </script>
+</body>
+</html>

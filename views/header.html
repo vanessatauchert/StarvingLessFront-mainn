@@ -1,0 +1,68 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo"></div>
+
+    <a class="navbar-burger burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <a id="homemain" class="navbar-item" href="/views/home.html">
+        Home
+      </a>
+      <a id="homeperfil" class="navbar-item">
+        Perfil
+      </a>
+      <a id="homesair" class="navbar-item">
+        Sair
+      </a>
+    </div>
+  </div>
+</nav>
+<script>
+  $(".navbar-burger").click(function () {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass('is-active');
+  });
+
+  const decodedToken = jwt.jwtDecode(token);
+    console.log(decodedToken);
+
+    // pegar informações com o token salvo
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+    const requestOptions = {
+      method: 'GET',
+      headers: headers
+    };
+  // ABRIR PÁGINA DO PERFIL
+  var submitPerfil = document.getElementById("homeperfil");
+  var submitSair = document.getElementById("homesair");
+  $(submitPerfil).on('click', function() {
+      const logged   = localStorage.getItem("id");
+      const userDetailsUrl = `http://localhost:8080/api/starvingless/user/v1/id/${logged}`;
+
+      fetch(userDetailsUrl, requestOptions)
+          .then(response => response.json())
+          .then(userData => {
+          // Abre a aba de perfil
+          const userTab = window.open('/views/perfil.html', '_self');
+
+          // salva o id do usuário clicado
+          localStorage.setItem("perfil", userDetailsUrl);
+          })
+          .catch(error => console.error(error));
+  });
+
+  $(submitSair).on('click', function() {
+    // salva o id do usuário clicado
+    localStorage.removeItem("token");
+    window.location.href = '/index.html';
+  });
+</script>
